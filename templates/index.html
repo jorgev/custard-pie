@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <meta name="description" content="Custard Pie is a classic rock cover band based in San Diego, CA and featuring the music of Led Zeppelin and The Rolling Stones.">
+        <title>Custard Pie</title>
+    </head>
+    <body class="background">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="display-1 heading text-center">Custard Pie</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="nav justify-content-center nav-pills tfont">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/bios.html">Bios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/upcoming.html">Schedule</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/songlist.html">Songlist</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/media.html">Media</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/news.html">News</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <img class="img-fluid rounded centered" alt="Band" src="/static/images/bandpic.jpg" width="795" height="513" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h1 class="display-4 heading">Upcoming Shows</h1>
+                    <table class="table table-secondary table-striped">
+                        <tbody>
+                            {% for event in upcoming %}
+                            <tr class="tfont"><td>{{event.venue}}</td><td>{{event.date.strftime('%A, %B %-d')}}</td><td>{{event.time}}</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h1 class="display-4 heading">The Band</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <img class="img-fluid rounded centered" alt="Woody" src="/static/images/woody_profile.png" width="266" height="400" />
+                    <div class="profile-lead text-center">Mark Wood</div>
+                    <div class="profile text-center">Guitar/Vocals</div>
+                </div>
+                <div class="col-sm">
+                    <img class="img-fluid rounded centered" alt="Tony" src="/static/images/tony_profile.png" width="266" height="400" />
+                    <div class="profile-lead text-center">Tony Rivas</div>
+                    <div class="profile text-center">Vocals</div>
+                </div>
+            </div>
+            <div class="row" style="height: 24px">
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <img class="img-fluid rounded centered" alt="Marty" src="/static/images/marty_profile.png" width="266" height="400" />
+                    <div class="profile-lead text-center">Marty Schwartz</div>
+                    <div class="profile text-center">Bass</div>
+                </div>
+                <div class="col-sm">
+                    <img class="img-fluid rounded centered" alt="Jorge" src="/static/images/jorge_profile.png" width="266" height="400" />
+                    <div class="profile-lead text-center">Jorge Velázquez</div>
+                    <div class="profile text-center">Drums/Vocals</div>
+                </div>
+            </div>
+            <div class="row" style="height: 64px">
+            </div>
+        </div>
+    </body>
+</html>

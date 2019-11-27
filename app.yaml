@@ -1,0 +1,68 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: pytz
+  version: latest
+
+handlers:
+- url: /static
+  static_dir: static
+
+- url: /
+  script: main.app
+
+- url: /index.html
+  script: main.app
+
+- url: /bios.html
+  script: main.app
+
+- url: /upcoming.html
+  script: main.app
+
+- url: /upcoming-shows.html
+  script: main.app
+
+- url: /songlist.html
+  script: main.app
+
+- url: /media.html
+  script: main.app
+
+- url: /news.html
+  script: main.app
+
+- url: /contact.html
+  script: main.app
+
+- url: /submitted.html
+  script: main.app
+
+- url: /admin
+  script: main.app
+  login: admin
+
+- url: /events
+  script: main.app
+
+- url: /edit_event
+  script: main.app
+  login: admin
+
+- url: /add_news
+  script: main.app
+  login: admin
+
+- url: /cleanup
+  script: main.app
+  login: admin
+
+- url: /favicon.ico
+  static_files: static/favicon.ico
+  upload: favicon\.ico
+
+- url: /robots.txt
+  static_files: static/robots.txt
+  upload: robots\.txt

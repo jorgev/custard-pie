@@ -1,0 +1,44 @@
+@font-face {
+    font-family: Carouselambra;
+    src: url(/static/fonts/carouselambra.otf) format("opentype");
+}
+.cpred {
+    color: #FF2600;
+}
+.background {
+    background-color: white;
+/*
+    background: url(/static/images/banner-2369464__480.jpg) no-repeat center center fixed;
+    background-size: cover;
+*/
+}
+.heading {
+    font-family: Carouselambra;
+    color: darkcyan;
+}
+.tfont {
+    color: darkcyan;
+    font-size: 1.6em;
+}
+.rounded {
+    border-radius: 8px;
+}
+.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+a.nav-link {
+    color: darkcyan;
+}
+a.nav-link:hover {
+    color: darkslategray;
+}
+.profile-lead {
+    color: darkcyan;
+    font-size: 1.8em;
+}
+.profile {
+    color: darkcyan;
+    font-size: 1.4em;
+}
