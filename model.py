@@ -3,8 +3,7 @@ from google.appengine.ext import ndb
 class Event(ndb.Model):
     venue = ndb.StringProperty()
     location = ndb.StringProperty()
-    date = ndb.DateProperty()
-    time = ndb.StringProperty()
+    start_time = ndb.DateTimeProperty()
     created = ndb.DateTimeProperty(auto_now_add=True)
     updated = ndb.DateTimeProperty(auto_now=True)
     created_by = ndb.UserProperty()

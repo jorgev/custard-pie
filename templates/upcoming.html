@@ -37,7 +37,7 @@
                     <table class="table table-secondary table-striped">
                         <tbody>
                             {% for event in month.events %}
-                            <tr class="tfont"><td>{{event.date.strftime("%A, %B %-d")}}</td><td>{{event.venue}}</td><td>{{event.location}}</td><td>{{event.time}}</td></tr>
+                            <tr class="tfont"><td>{{event.start_time.strftime("%A, %B %-d at %-I:%M %p")}}</td><td>{{event.venue}}</td><td>{{event.location}}</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>

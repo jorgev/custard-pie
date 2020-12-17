@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 @app.route('/index.html', methods=['GET'])
 def home():
-    upcoming = model.Event.query().order(model.Event.date).fetch(4)
+    upcoming = model.Event.query().order(model.Event.start_time).fetch(4)
     return render_template('index.html', upcoming=upcoming)
 
 @app.route('/bios.html', methods=['GET'])
@@ -21,15 +21,15 @@ def bios():
 @app.route('/upcoming.html', methods=['GET'])
 @app.route('/upcoming-shows.html', methods=['GET'])
 def upcoming():
-    upcoming = model.Event.query().order(model.Event.date).fetch()
+    upcoming = model.Event.query().order(model.Event.start_time).fetch()
     cur_month = None
     data = []
     events = []
     for event in upcoming:
-        if cur_month != event.date.strftime('%B'):
+        if cur_month != event.start_time.strftime('%B'):
             if cur_month:
                 data.append({ 'name': cur_month, 'events': events })
-            cur_month = event.date.strftime('%B')
+            cur_month = event.start_time.strftime('%B')
             events = []
         events.append(event)
     if events:
@@ -74,10 +74,9 @@ def admin():
     if request.method == 'POST':
         venue = request.form['venue']
         location = request.form['location']
-        date = datetime.datetime.strptime(request.form['date'], '%Y-%m-%d')
-        time = request.form['time']
+        start_time = datetime.datetime.strptime('%s %s' % (request.form['date'], request.form['time']), '%Y-%m-%d %H:%M')
         user = users.get_current_user()
-        event = model.Event(venue=venue, location=location, date=date, time=time, created_by=user)
+        event = model.Event(venue=venue, location=location, start_time=start_time, created_by=user)
         added = event.put()
         return redirect('/admin')
     elif request.args.get('delete'):
@@ -85,7 +84,7 @@ def admin():
         k.delete()
         return redirect('/admin')
     news = model.News.query().order(model.News.created).fetch()
-    upcoming = model.Event.query().order(model.Event.date).fetch()
+    upcoming = model.Event.query().order(model.Event.start_time).fetch()
     return render_template('admin.html', upcoming=upcoming, news = news)
 
 @app.route('/events', methods=['GET'])
@@ -96,13 +95,13 @@ def events():
         limit = int(request.args['limit'])
     if request.args.get('venue'):
         venue = request.args['venue']
-        event = model.Event.query(model.Event.venue == venue).order(model.Event.date).get()
+        event = model.Event.query(model.Event.venue == venue).order(model.Event.start_time).get()
         if event:
-            events.append({ 'venue': event.venue, 'location': event.location, 'date': datetime.datetime.strftime(event.date, '%A, %B %-d'), 'time': event.time })
+            events.append({ 'venue': event.venue, 'location': event.location, 'date': datetime.datetime.strftime(event.start_time, '%A, %B %-d at %-I:%M %p') })
     else:
-        upcoming = model.Event.query().order(model.Event.date).fetch(limit)
+        upcoming = model.Event.query().order(model.Event.start_time).fetch(limit)
         for event in upcoming:
-            events.append({ 'venue': event.venue, 'location': event.location, 'date': datetime.datetime.strftime(event.date, '%A, %B %-d'), 'time': event.time })
+            events.append({ 'venue': event.venue, 'location': event.location, 'date': datetime.datetime.strftime(event.start_time, '%A, %B %-d at %-I:%M %p') })
     return jsonify(events)
 
 @app.route('/edit_event', methods=['GET', 'POST'])
@@ -112,8 +111,7 @@ def edit_event():
     if request.method == 'POST':
         event.venue = request.form['venue']
         event.location = request.form['location']
-        event.date = datetime.datetime.strptime(request.form['date'], '%Y-%m-%d')
-        event.time = request.form['time']
+        event.start_time = datetime.datetime.strptime('%s %s' % (request.form['date'], request.form['time']), '%Y-%m-%d %H:%M')
         event.updated_by = users.get_current_user()
         event.put()
         return redirect('/admin')
@@ -127,7 +125,7 @@ def add_news():
 
 @app.route('/cleanup', methods=['GET'])
 def cleanup():
-    old = model.Event.query(model.Event.date < datetime.date.today()).order(model.Event.date).fetch()
+    old = model.Event.query(model.Event.start_time < datetime.start_time.today()).order(model.Event.start_time).fetch()
     for e in old:
         e.key.delete()
     status = { 'entries_deleted': len(old) }

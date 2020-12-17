@@ -17,8 +17,8 @@
                     <h3>Update Event</h3>
                     <label for="venue">Venue:&nbsp;</label><input name="venue" type="text" size="48" value="{{event.venue}}" /><br />
                     <label for="location">Location:&nbsp;</label><input name="location" type="text" size="48" value="{{event.location}}" /><br />
-                    <label for="date">Date:&nbsp;</label><input name="date" type="date" value="{{event.date}}" /><br />
-                    <label for="time">Time:&nbsp;</label><input name="time" type="text" value="{{event.time}}" /><br />
+                    <label for="date">Date:&nbsp;</label><input name="date" type="date" value="{{event.start_time.strftime("%Y-%m-%d")}}" /><br />
+                    <label for="time">Time:&nbsp;</label><input name="time" type="time" value="{{event.start_time.strftime("%H:%M")}}" /><br />
                     <input type="submit" class="btn btn-primary" value="Update Event"/>
                 </form>
             </div>

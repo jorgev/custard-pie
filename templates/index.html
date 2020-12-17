@@ -42,7 +42,7 @@
                     <table class="table table-secondary table-striped">
                         <tbody>
                             {% for event in upcoming %}
-                            <tr class="tfont"><td>{{event.venue}}</td><td>{{event.date.strftime('%A, %B %-d')}}</td><td>{{event.time}}</td></tr>
+                            <tr class="tfont"><td>{{event.venue}}</td><td>{{event.location}}</td><td>{{event.start_time.strftime('%A, %B %-d at %-I:%M %p')}}</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>
