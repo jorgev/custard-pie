@@ -97,11 +97,11 @@ def events():
         venue = request.args['venue']
         event = model.Event.query(model.Event.venue == venue).order(model.Event.start_time).get()
         if event:
-            events.append({ 'venue': event.venue, 'location': event.location, 'date': datetime.datetime.strftime(event.start_time, '%A, %B %-d at %-I:%M %p') })
+            events.append({ 'venue': event.venue, 'location': event.location, 'date': datetime.datetime.strftime(event.start_time, '%A, %B %-d'), 'time': datetime.datetime.strftime(event.start_time, '%-I:%M %p') })
     else:
         upcoming = model.Event.query().order(model.Event.start_time).fetch(limit)
         for event in upcoming:
-            events.append({ 'venue': event.venue, 'location': event.location, 'date': datetime.datetime.strftime(event.start_time, '%A, %B %-d at %-I:%M %p') })
+            events.append({ 'venue': event.venue, 'location': event.location, 'date': datetime.datetime.strftime(event.start_time, '%A, %B %-d'), 'time': datetime.datetime.strftime(event.start_time, '%-I:%M %p') })
     return jsonify(events)
 
 @app.route('/edit_event', methods=['GET', 'POST'])
