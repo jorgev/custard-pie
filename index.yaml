@@ -13,9 +13,9 @@ indexes:
 - kind: Event
   properties:
   - name: venue
-  - name: start_time
+  - name: date
 
 - kind: Event
   properties:
   - name: venue
-  - name: date
+  - name: start_time
