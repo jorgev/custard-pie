@@ -125,7 +125,7 @@ def add_news():
 
 @app.route('/cleanup', methods=['GET'])
 def cleanup():
-    old = model.Event.query(model.Event.start_time < datetime.start_time.today()).order(model.Event.start_time).fetch()
+    old = model.Event.query(model.Event.start_time < datetime.datetime.today()).order(model.Event.start_time).fetch()
     for e in old:
         e.key.delete()
     status = { 'entries_deleted': len(old) }
